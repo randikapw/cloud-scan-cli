@@ -1,0 +1,21 @@
+{
+    "defectdojo" : {
+        "host" : "https://demo.defectdojo.org",
+        "credentials" : {
+            "username" : "admin",
+            "password" : "1Defectdojo@demo#appsec"
+        },
+        "data" : {
+            "moduleNameMaxLength" : 200
+        }
+    },
+    "cloudsploit" : {
+        "rootDir": "/path-to-your-cloudsploit-nodejs-product-rootDir"
+    },
+    "profiles" : {
+        "profileRootDir" : "/cloud-scan-cli/profiles",
+        "configDirName" : "configs",
+        "reportsDirName" : "reports"
+    }
+    
+}

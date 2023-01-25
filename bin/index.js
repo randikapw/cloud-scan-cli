@@ -394,6 +394,9 @@ function generageCloudSploitConfigFile (scanConfigs,filepath) {
 }
 
 async function executeScans() {
+    console.debug(`Environment: ${config.util.getEnv('NODE_ENV')}`)
+    console.debug(`ConfigLocation: ${config.util.getEnv('NODE_CONFIG_DIR')}`)
+    console.debug(`Target Dojo host: ${dojoHost}`)
     validateConfigs();
     validateArguments();
     
@@ -409,13 +412,12 @@ async function executeScans() {
     
     
     try {
+        // console.log(`process.env.NODE_ENV: ${process.env.NODE_ENV}`)
+
         mkDirIfNotExist(cloudSploitReportsPath);
-        // generageCloudSploitConfigFile(scanConfigs,configFilePath);
-        // await executeCloudSploitScan(configFilePath, cloudPloitOutputPath);
-        // await enhanceCloudSploitResult(cloudPloitOutputPath, CloudSploitEnhancedOutputPath);
-        console.log(`Target Dojo host: ${dojoHost}`)
-        console.log(`process.env.NODE_ENV: ${process.env.NODE_ENV}`)
-        console.log(`config.util.getEnv(): ${config.util.getEnv('NODE_ENV')}`)
+        generageCloudSploitConfigFile(scanConfigs,configFilePath);
+        await executeCloudSploitScan(configFilePath, cloudPloitOutputPath);
+        await enhanceCloudSploitResult(cloudPloitOutputPath, CloudSploitEnhancedOutputPath);
         await defectDojoAuthenticate();
         let product = await defectdojoGetProductsByName(productName, true);
         if (!product) {

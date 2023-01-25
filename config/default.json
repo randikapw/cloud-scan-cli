@@ -13,7 +13,7 @@
         "rootDir": "/path-to-your-cloudsploit-nodejs-product-rootDir"
     },
     "profiles" : {
-        "profileRootDir" : "/cloud-scan-cli/profiles",
+        "profileRootDir" : "~/cloud-scan-cli/profiles",
         "configDirName" : "configs",
         "reportsDirName" : "reports"
     }

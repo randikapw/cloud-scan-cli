@@ -2,6 +2,7 @@ import config from "config";
 import axios from "axios";
 import fs from "fs";
 import FormData from "form-data"
+import moment from "moment";
 
 
 
@@ -79,7 +80,7 @@ export default class DefectDojo {
             headers: {
                 'accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': `Token ${authToken}`,
+                'Authorization': `Token ${this.#authToken}`,
             },
             data: data
         };
@@ -109,11 +110,15 @@ export default class DefectDojo {
 
     async createEngagement(engagementName, productId, startDate, endDate) {
         this.#logger.info(`Creating defectdojo engagement: ${engagementName}`)
-    
+        if (!startDate) {
+            const today = moment();
+            startDate = today.format('YYYY-MM-DD')
+            endDate = today.add(1, 'months').format('YYYY-MM-DD')
+        }
         var data = JSON.stringify({
             "name": engagementName,
-            "target_start": startDate ?? "2023-01-19",
-            "target_end": endDate ?? "2023-01-26",
+            "target_start": startDate,
+            "target_end": endDate,
             "product": productId
         });
     
@@ -123,7 +128,7 @@ export default class DefectDojo {
             headers: {
                 'accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': `Token ${authToken}`,
+                'Authorization': `Token ${this.#authToken}`,
             },
             data: data
         };
@@ -132,7 +137,7 @@ export default class DefectDojo {
         return response.data;
     }
 
-    async importScan(productName, engagementName, scanFilePath, scanType) {
+    async importScan(productName, engagementName, environmentName, scanFilePath, scanType) {
         if (!scanType) scanType = 'Cloudsploit Scan';
         const fileSize = fs.statSync(scanFilePath).size;
         const readStream = fs.createReadStream(scanFilePath);
@@ -153,7 +158,8 @@ export default class DefectDojo {
             }
         });
         var data = new FormData();
-        data.append('scan_date', '2023-01-18');
+        data.append('test_title', environmentName);
+        data.append('scan_date', moment().format('YYYY-MM-DD'));
         data.append('minimum_severity', 'High'); //Info
         data.append('active', 'true');
         data.append('verified', 'false');

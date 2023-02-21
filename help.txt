@@ -1,0 +1,49 @@
+Helpful commands
+# copy run config file to azure server via ssh
+scp -i <private key path> <local configs file locatoin> <user>@<host>:<remotedirecorty path>
+
+Ex:
+scp -i ~/.ssh/dojouser.pem /mnt/d/ubuntushare/cloudscancfg.json dojouser@defectdojo.eastus.cloudapp.azure.com:~/cloud-scan-cli/run-configs
+scp -i ~/.ssh/dojouser.pem /mnt/d/ubuntushare/local.json dojouser@defectdojo.eastus.cloudapp.azure.com:~/cloud-scan-cli/local-configs/
+
+# ssh to remote server
+ssh -i <private key path> <user>@<host>
+Ex:
+ssh -i ~/.ssh/dojouser.pem dojouser@defectdojo.eastus.cloudapp.azure.com
+
+#commands to run in background
+-run in backgournd
+nohup node . -c /d/Projects/cloudsploit/configs/credential/cloudscancfg.json &
+
+-run in backgournd with custom file output
+nohup node . -c /d/Projects/cloudsploit/configs/credential/cloudscancfg.json &> csclog.log
+
+-to list nohup process of same console
+jobs
+
+-to get nohup process back to foground
+fg  //most recent 
+fg %<job index from jobs command>  //Ex: fg
+
+-show realtime changes of file in console
+tail -f <filepath>
+
+- to get all node processes
+ps aux | grep node
+
+- to kill specific process
+pkill -9 PID
+
+
+#cloud sploit local run support
+node . --config d:/Projects/cloudsploit/configs/config2.js --console=none --json d:/Projects/nodejs/cloud-scan-cli/profiles/Cypeer-Dev3/reports/DefaultEngament/cloudsploits/cloudsploit_scan_raw_report.json
+
+node . --config d:/Projects/nodejs/cloud-scan-cli/profiles/Cypeer-Dev3/reports/DefaultEngament/cloudsploits/csconfig.js --console=none --json d:/Projects/nodejs/cloud-scan-cli/profiles/Cypeer-Dev3/reports/DefaultEngament/cloudsploits/cloudsploit_scan_raw_report.json
+
+d:/Projects/nodejs/cloud-scan-cli/profiles/Cypeer-Dev3/reports/DefaultEngament/cloudsploits/cloud-sploit-config.js
+
+mv d:/Projects/nodejs/cloud-scan-cli/profiles/Cypeer-Dev3/reports/DefaultEngament/cloudsploits/csconfig.js d:/Projects/cloudsploit/configs/
+
+node . --config d:/Projects/cloudsploit/configs/csconfig.js --console=none --json d:/Projects/nodejs/cloud-scan-cli/profiles/Cypeer-Dev3/reports/DefaultEngament/cloudsploits/cloudsploit_scan_raw_report.json
+
+node . --config "d:/Projects/nodejs/cloud-scan-cli/profiles/Cypeer-Dev3/reports/DefaultEngament/cloudsploits/csconfig.js" --console=none --json d:/Projects/nodejs/cloud-scan-cli/profiles/Cypeer-Dev3/reports/DefaultEngament/cloudsploits/cloudsploit_scan_raw_report.json

@@ -149,7 +149,7 @@ async function executeScans() {
                 logger.info(`Engagement with name ${engagementName} is not currently exist`)
                 await defectdojo.createEngagement(engagementName, product.id)
             }
-            await defectdojo.importScan(productName, engagementName, cloudsploitScanOutput);
+            await defectdojo.importScan(productName, engagementName, account.environmentId, cloudsploitScanOutput);
         } catch (error) {
             logger.error(error.message);
             logger.error(error)

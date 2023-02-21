@@ -1,4 +1,12 @@
 {
+    "logger" : {
+        "baseDir" : "./logs",
+        "baseFileName" : "base.log",
+        "enableConsole" : false
+    },
+    "scheduling": {
+        "scancron" : "* */1 * * *"
+    },
     "defectdojo" : {
         "host" : "https://demo.defectdojo.org",
         "credentials" : {
@@ -16,6 +24,12 @@
         "profileRootDir" : "~/cloud-scan-cli/profiles",
         "configDirName" : "configs",
         "reportsDirName" : "reports"
+    },
+    "azure" : {
+        "keyVault" : {
+            "valueMaxLength" : 255,
+            "name" : "provide your keyVault name in highlevel config file"
+        }
     }
     
 }

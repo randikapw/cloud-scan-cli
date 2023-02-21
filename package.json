@@ -6,6 +6,7 @@
   "bin": {
     "cloudscan": "./bin/index.js"
   },
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,8 +19,13 @@
   "author": "Scybers",
   "license": "ISC",
   "dependencies": {
+    "@azure/identity": "^3.1.3",
+    "@azure/keyvault-secrets": "^4.6.0",
     "axios": "^1.2.3",
     "config": "^3.3.9",
+    "moment": "^2.29.4",
+    "node-cron": "^3.0.2",
+    "winston": "^3.8.2",
     "yargs": "^17.6.2"
   }
 }
